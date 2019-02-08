@@ -1,7 +1,6 @@
 Bashar:
 login page
 register page
-(1*) split server code to two files (auth and index)
 
 Samer:
 index page
