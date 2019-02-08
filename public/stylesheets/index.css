@@ -1,0 +1,55 @@
+body, html {
+    height: 100%;
+}
+
+.bg {
+    /* The image used */
+    background-image: url("../images/garage-login-background.jpg");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#mySidenav button {
+    position: absolute;
+    left: -80px;
+    transition: 0.5s;
+    padding: 15px;
+    width: 100px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    border-radius: 0 5px 5px 0;
+    z-index: 2;
+}
+
+#mySidenav button:hover {
+    left: 0;
+}
+
+.vericaltext{
+    width:1px;
+    word-wrap: break-word;
+    white-space:pre-wrap; 
+}
+
+img {
+    width: 300px;
+}
+
+.overlay {
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background-color:#222;
+    opacity:0.8;
+    z-index:1;
+    transition: 0.5s;
+}

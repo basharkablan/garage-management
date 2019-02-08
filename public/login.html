@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        
+        <link rel="stylesheet" href="static/lib/bootstrap.min.css" />
+        <script src="static/lib/jquery-3.3.1.slim.min.js"></script>
+        <script src="static/lib/popper.min.js"></script>
+        <script src="static/lib/bootstrap.min.js"></script>
+        
+        <title>
+            GarageData 1.0
+        </title>
+
+        <link rel="stylesheet" href="/static/stylesheets/login.css">
+    </head>
+    <body>
+        <div class="bg">
+            <div class="container py-5">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6 mx-auto">
+                                <div class="shadow-lg rounded">
+                                    <div class="card bg-white mx-auto">
+                                        <div class="card-header bg-warning font-weight-bold text-center">GarageData 1.0</div>
+                                        <div class="card-body text-white bg-dark">
+                                            <form action="login" method="POST">
+                                                <div class="form-group">
+                                                    <label for="usernameInput">Username</label>
+                                                    <input type="text" class="form-control" id="usernameInput" placeholder="Enter username" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="passwordInput">Password</label>
+                                                    <input type="password" class="form-control" id="passwordInput" placeholder="Password" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <a class="badge badge-info" href="register">Register</a>
+                                                </div>
+                                                <button type="submit" class="btn btn-success col-md-12">Login</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
