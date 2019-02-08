@@ -11,7 +11,7 @@ app.use('/static', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.route('/codes').get((req, res) => {
+app.get('/codes', (req, res) => {
     MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
         dbo = db.db("obd2_codes");
         dbo.collection('codes').find().toArray(function(err, result) {
