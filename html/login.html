@@ -13,7 +13,7 @@
             GarageData 1.0
         </title>
 
-        <link rel="stylesheet" href="/static/stylesheets/login.css">
+        <link rel="stylesheet" href="static/stylesheets/login.css">
         <script>
             function submit_login() {
                 var username = $("#usernameInput").val();
@@ -43,7 +43,10 @@
                             <div class="col-md-6 mx-auto">
                                 <div class="shadow-lg rounded">
                                     <div class="card bg-white mx-auto">
-                                        <div class="card-header bg-warning font-weight-bold text-center">GarageData 1.0</div>
+                                        <div class="card-header bg-warning font-weight-bold text-center">
+                                            <img src="static/favicon.png" height="50px"/>
+                                            <div>GarageData 1.0</div>
+                                        </div>
                                         <div class="card-body text-white bg-dark">
                                             <form id="login_form" action="login" method="POST" onsubmit="return submit_login();">
                                                 <div class="form-group">
