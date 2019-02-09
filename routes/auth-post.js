@@ -9,7 +9,7 @@ router.post('/login',(req, res) => {
 
     console.log(username + " - " + password);
 
-    res.send(JSON.stringify(messages.wrong_cred));
+    res.send(JSON.stringify(messages.success));
 });
 
 module.exports = router;

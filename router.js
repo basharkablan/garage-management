@@ -49,13 +49,24 @@ function isNotAuthenticatedPost() {
 };
 
 
-router.use('/', isNotAuthenticatedGet(), require('./routes/auth-get'));
-router.use('/', isNotAuthenticatedPost(), require('./routes/auth-post'));
+//With Auth
+// router.use('/', isNotAuthenticatedGet(), require('./routes/auth-get'));
+// router.use('/', isNotAuthenticatedPost(), require('./routes/auth-post'));
 
-router.use('/', isNotAuthenticatedGet(), require('./routes/register-get'));
-router.use('/', isNotAuthenticatedPost(), require('./routes/register-post'));
+// router.use('/', isNotAuthenticatedGet(), require('./routes/register-get'));
+// router.use('/', isNotAuthenticatedPost(), require('./routes/register-post'));
 
-router.use('/', isAuthenticatedGet(), require('./routes/index-get'));
-router.use('/', isAuthenticatedPost(), require('./routes/index-post'));
+// router.use('/', isAuthenticatedGet(), require('./routes/index-get'));
+// router.use('/', isAuthenticatedPost(), require('./routes/index-post'));
+
+// No Auth
+router.use('/', require('./routes/auth-get'));
+router.use('/', require('./routes/auth-post'));
+
+router.use('/', require('./routes/register-get'));
+router.use('/', require('./routes/register-post'));
+
+router.use('/', require('./routes/index-get'));
+router.use('/', require('./routes/index-post'));
 
 module.exports = router;
