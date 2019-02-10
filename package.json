@@ -13,7 +13,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "express-favicon": "^2.0.1",
-    "mongoose": "^5.4.10",
+    "mongoose": "^5.4.11",
     "uuid": "^3.3.2"
   }
 }
