@@ -13,6 +13,14 @@ module.exports = {
     },
     wrong_cred: {
         status: 'wrong-cred',
-        message:'incorrect username or password'
+        message:'Incorrect username or password'
+    },
+    missing_field: {
+        status: 'missing-field',
+        message: 'Fill the missing fields'
+    },
+    username_not_available: {
+        status: 'username-not-available',
+        message: 'The username is not available'
     }
 }

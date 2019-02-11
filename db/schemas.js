@@ -8,5 +8,12 @@ module.exports = {
     code: new mongoose.Schema({
         code: String,
         error: String
+    }),
+    user: new mongoose.Schema({
+        firstName: String,
+        lastName: String,
+        email: String,
+        username: String,
+        password: String
     })
 }

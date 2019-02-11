@@ -3,5 +3,6 @@ var schemas = require('./schemas');
 
 module.exports = {
     carRecords: mongoose.model('carRecords', schemas.carRecord),
-    codes: mongoose.model('codes', schemas.code)
+    codes: mongoose.model('codes', schemas.code),
+    users: mongoose.model('users', schemas.user)
 }
