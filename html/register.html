@@ -14,6 +14,25 @@
         </title>
 
         <link rel="stylesheet" href="/static/stylesheets/login.css">
+        <script>
+            function submit_register() {
+                var username = $("#usernameInput").val();
+                var password = $("#passwordInput").val();
+
+                $.post("register", {username: username, password: password}, function(data) {
+                    var res = JSON.parse(data);
+                    if(res.status === 'success')
+                        window.location = "/login";
+                    else
+                        $("#error").text(res.message);
+                });
+                return false;
+            }
+
+            function clear_error() {
+                $("#error").text("");
+            }
+        </script>
     </head>
     <body>
         <div class="bg">
@@ -29,30 +48,30 @@
                                             <div>GarageData 1.0</div>
                                         </div>
                                         <div class="card-body text-white bg-dark">
-                                            <form action="register" method="POST">
+                                            <form action="register" method="POST" onsubmit="return submit_register();">
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                                 <label for="firstNameInput">First name <span class="text-danger">*</span></label>
-                                                                <input type="text" class="form-control" id="firstNameInput" placeholder="Enter first name" required>
+                                                                <input type="text" class="form-control" id="firstNameInput" placeholder="Enter first name" oninput="clear_error()" required>
                                                         </div>
                                                         <div class="col-md-6">
                                                                 <label for="lastNameInput">Last name <span class="text-danger">*</span></label>
-                                                                <input type="text" class="form-control" id="lastNameInput" placeholder="Enter last name" required>
+                                                                <input type="text" class="form-control" id="lastNameInput" placeholder="Enter last name" oninput="clear_error()" required>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="usernameInput">Username <span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="usernameInput" placeholder="Enter username" required>
+                                                    <input type="text" class="form-control" id="usernameInput" placeholder="Enter username" oninput="clear_error()" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="emailInput">E-mail <span class="text-danger">*</span></label>
-                                                    <input type="email" class="form-control" id="emailInput" placeholder="Enter E-mail" required>
+                                                    <input type="email" class="form-control" id="emailInput" placeholder="Enter E-mail" oninput="clear_error()" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="passwordInput">Password <span class="text-danger">*</span></label>
-                                                    <input type="password" class="form-control" id="passwordInput" placeholder="Password" required>
+                                                    <input type="password" class="form-control" id="passwordInput" placeholder="Password" oninput="clear_error()" required>
                                                 </div>
                                                 <div class="form-group">
                                                     Already have an account? <a class="badge badge-info" href="login">Login</a>
