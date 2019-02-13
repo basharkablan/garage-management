@@ -10,10 +10,10 @@ module.exports = {
         error: String
     }),
     user: new mongoose.Schema({
-        firstName: String,
-        lastName: String,
-        email: String,
-        username: String,
-        password: String
+        firstName: { type: String, trim: true },
+        lastName: { type: String, trim: true },
+        email: { type: String, lowercase: true, trim: true },
+        username: { type: String, minlength: 1, lowercase: true, trim: true },
+        password: { type: String, minlength: 1, trim: true }
     })
 }

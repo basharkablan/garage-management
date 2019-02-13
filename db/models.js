@@ -2,7 +2,7 @@ var mongoose = require('./db');
 var schemas = require('./schemas');
 
 module.exports = {
-    carRecords: mongoose.model('carRecords', schemas.carRecord),
-    codes: mongoose.model('codes', schemas.code),
-    users: mongoose.model('users', schemas.user)
+    carRecord: mongoose.model('carRecords', schemas.carRecord),
+    code: mongoose.model('codes', schemas.code),
+    user: mongoose.model('users', schemas.user)
 }

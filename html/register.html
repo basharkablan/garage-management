@@ -16,10 +16,13 @@
         <link rel="stylesheet" href="/static/stylesheets/login.css">
         <script>
             function submit_register() {
+                var firstName = $("#firstNameInput").val();
+                var lastName = $("#lastNameInput").val();
                 var username = $("#usernameInput").val();
+                var email = $("#emailInput").val();
                 var password = $("#passwordInput").val();
 
-                $.post("register", {username: username, password: password}, function(data) {
+                $.post("register", {firstName: firstName, lastName: lastName, username: username, email: email, password: password}, function(data) {
                     var res = JSON.parse(data);
                     if(res.status === 'success')
                         window.location = "/login";
@@ -53,28 +56,31 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                                 <label for="firstNameInput">First name <span class="text-danger">*</span></label>
-                                                                <input type="text" class="form-control" id="firstNameInput" placeholder="Enter first name" oninput="clear_error()" required>
+                                                                <input type="text" class="form-control" id="firstNameInput" placeholder="Enter first name" oninput="clear_error()" required />
                                                         </div>
                                                         <div class="col-md-6">
                                                                 <label for="lastNameInput">Last name <span class="text-danger">*</span></label>
-                                                                <input type="text" class="form-control" id="lastNameInput" placeholder="Enter last name" oninput="clear_error()" required>
+                                                                <input type="text" class="form-control" id="lastNameInput" placeholder="Enter last name" oninput="clear_error()" required />
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="usernameInput">Username <span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="usernameInput" placeholder="Enter username" oninput="clear_error()" required>
+                                                    <input type="text" class="form-control" id="usernameInput" placeholder="Enter username" oninput="clear_error()" required />
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="emailInput">E-mail <span class="text-danger">*</span></label>
-                                                    <input type="email" class="form-control" id="emailInput" placeholder="Enter E-mail" oninput="clear_error()" required>
+                                                    <input type="email" class="form-control" id="emailInput" placeholder="Enter E-mail" oninput="clear_error()" required />
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="passwordInput">Password <span class="text-danger">*</span></label>
-                                                    <input type="password" class="form-control" id="passwordInput" placeholder="Enter Password" oninput="clear_error()" required>
+                                                    <input type="password" class="form-control" id="passwordInput" placeholder="Enter Password" oninput="clear_error()" required />
                                                 </div>
                                                 <div class="form-group">
                                                     Already have an account? <a class="badge badge-info" href="login">Login</a>
+                                                </div>
+                                                <div class="form-group">
+                                                    <span id="error" class="text-danger"></span>
                                                 </div>
                                                 <button type="submit" class="btn btn-success col-md-12">Register</button>
                                             </form>

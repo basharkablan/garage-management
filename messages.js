@@ -22,5 +22,9 @@ module.exports = {
     username_not_available: {
         status: 'username-not-available',
         message: 'The username is not available'
+    },
+    server_internal_error: {
+        status: 'server-internal-error',
+        message: 'Server internal error'
     }
 }

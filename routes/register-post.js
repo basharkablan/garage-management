@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 var messages = require('../messages');
+var models = require('../db/models');
 
 router.post('/register', (req, res) => {
-    //res.sendFile(__basedir + '/html/register.html');
 
     let first = req.body.firstName;
     let last = req.body.lastName;
@@ -16,9 +16,17 @@ router.post('/register', (req, res) => {
         res.send(JSON.stringify(messages.missing_field));
         return;
     }
+    var user = new models.user({firstName : first, lastName : last, email : email, username : username, password : password});
+    user.save(function (err, user) {
+        if(err) {
+            console.log(err);
+            res.send(JSON.stringify(messages.server_internal_error));
+            return;
+        }
 
-
-    res.send(JSON.stringify(messages.success));
+        console.log("registered: " + first + " " + last + ", " + username + ", " + email + ", " + password);
+        res.send(JSON.stringify(messages.success));
+    });
 });
 
 module.exports = router;

@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/codes', (req, res) => {
-    var codes = models.codes;
+    var codes = models.code;
 
     codes.find((err, result) => {
         if(err) throw err;
