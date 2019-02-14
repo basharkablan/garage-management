@@ -21,8 +21,9 @@
 
                 $.post("login", {username: username, password: password}, function(data) {
                     var res = JSON.parse(data);
-                    if(res.status === 'success')
+                    if(res.status === 'success') {
                         window.location = "/";
+                    }
                     else
                         $("#error").text(res.message);
                 });

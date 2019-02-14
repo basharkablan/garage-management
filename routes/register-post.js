@@ -4,7 +4,7 @@ var router = express.Router();
 var messages = require('../messages');
 var models = require('../db/models');
 
-router.post('/register', (req, res) => {
+router.post('/', (req, res) => {
 
     let first = req.body.firstName;
     let last = req.body.lastName;

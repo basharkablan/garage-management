@@ -1,10 +1,14 @@
 var express = require('express');
+var session = require('express-session');
 var router = express.Router();
 
 var messages = require('../messages');
 var models = require("../db/models");
+var sessions = require("../sessions");
 
-router.post('/login', function (req, res) {
+
+
+router.post('/', function (req, res) {
     username = req.body.username;
     password = req.body.password;
 
@@ -23,8 +27,11 @@ router.post('/login', function (req, res) {
             res.send(JSON.stringify(messages.wrong_cred));
             return;
         }
-        console.log("login: " + username + " - " + password);
-        res.send(JSON.stringify(messages.success));
+        var sid = sessions.getNewSession(username);
+        console.log("login: " + username + " - " + sid);
+        var data = messages.success;
+        req.session.sid = sid;
+        res.send(JSON.stringify(data));
     });
 });
 
