@@ -17,7 +17,6 @@ router.get('/codes', (req, res) => {
 
         for (let i=0; i < result.length; i++) {
             str = str + result[i]['code'] + " - " + result[i]['error'] + "</br>";
-            // str = str + "(new models.code({code : \"" + result[i]['code'] + "\", error : \"" + result[i]['error'] + "\"})).save(code_insert_callback);" + "</br>";
         }
         res.send(str);
     })
@@ -33,7 +32,6 @@ router.get('/brands', (req, res) => {
 
         for (let i=0; i < result.length; i++) {
             str = str + result[i]['brandName'] + "</br>";
-            // str = str + "(new models.brand({brandName : \"" + result[i]['brandName'] + "\"})).save(insert_callback);" + "</br>";
         }
         res.send(str);
     })
