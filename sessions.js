@@ -9,7 +9,6 @@ module.exports = {
     getNewSession: function(username) {
         let sid = uuid();
         this.users_sessions[sid] = {time: Date.now(), username: username};
-        console.log(sid + " - " + username);
         return sid;
     },
 
@@ -19,9 +18,7 @@ module.exports = {
 
     verifySession: function(req) {
         if(req.session.sid !== undefined) {
-            console.log(req.session.sid);
             if(this.has(req.session.sid)) {
-                console.log("verified session");
                 return true;
             }
         }

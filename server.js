@@ -20,9 +20,9 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: {}
-}))
+}));
 
-var mongoose = require('./db/db');
+require('./db/init_db');
 
 app.use('/', require("./router"));
 

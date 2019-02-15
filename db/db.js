@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/obd2_codes', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/garage_db', { useNewUrlParser: true });
 
 var db = mongoose.connection;
 
