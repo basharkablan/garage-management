@@ -23,5 +23,21 @@ router.get('/codes', (req, res) => {
     })
 });
 
+router.get('/brands', (req, res) => {
+    var brands = models.brand;
+
+    brands.find((err, result) => {
+        if(err) throw err;
+
+        let str = "";
+
+        for (let i=0; i < result.length; i++) {
+            str = str + result[i]['brandName'] + "</br>";
+            // str = str + "(new models.brand({brandName : \"" + result[i]['brandName'] + "\"})).save(insert_callback);" + "</br>";
+        }
+        res.send(str);
+    })
+});
+
 
 module.exports = router;
