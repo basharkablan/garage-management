@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        
+        <link rel="stylesheet" href="static/lib/bootstrap.min.css" />
+        <script src="static/lib/jquery-3.3.1.min.js"></script>
+        <script src="static/lib/popper.min.js"></script>
+        <script src="static/lib/bootstrap.min.js"></script>
+        
+        <title>
+            GarageData 1.0
+        </title>
+
+        <link rel="stylesheet" href="static/stylesheets/login.css">
+        <script src="static/js/reset.js"></script>
+    </head>
+    <body>
+        <div class="bg">
+            <div class="container py-5">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6 mx-auto">
+                                <div class="shadow-lg rounded">
+                                    <div class="card bg-white mx-auto">
+                                        <div class="card-header bg-warning font-weight-bold text-center">
+                                            <img src="static/favicon.png" height="50px"/>
+                                            <div>GarageData 1.0</div>
+                                        </div>
+                                        <div id="reset_div" class="card-body text-white bg-dark">
+                                            <form id="reset_form" onsubmit="return submit_reset();">
+                                                <div class="form-group">
+                                                    <label for="emailInput">E-mail</label>
+                                                    <input type="email" class="form-control" id="emailInput" placeholder="Enter E-mail" oninput="clear_error()" required />
+                                                </div>
+                                                <div class="form-group">
+                                                    <a class="badge badge-info" href="login">Back to Login</a>
+                                                </div>
+                                                <div class="form-group">
+                                                    <p id="error1" class="text-warning font-weight-bold"></p>
+                                                </div>
+                                                <button type="submit" class="btn btn-success col-md-12">Reset Password</button>
+                                            </form>
+                                        </div>
+                                        <div id="password_div" class="card-body text-white bg-dark" style="display: none;">
+                                            <form id="password_form" onsubmit="return submit_password();">
+                                                <div class="form-group">
+                                                    <label for="passwordInput">Password</label>
+                                                    <input type="password" class="form-control" id="passwordInput" placeholder="Enter Password" oninput="clear_error()" required />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="confirmInput">Confirm Password</label>
+                                                    <input type="password" class="form-control" id="confirmInput" placeholder="Re-Enter Password" oninput="clear_error()" required />
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="custom-control custom-switch">
+                                                        <label>
+                                                            <input type="checkbox" class="custom-control-input" id="togglePassword" onclick="showOrHidePassword()">
+                                                            <label class="custom-control-label" for="togglePassword">Show Password</label>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <a class="badge badge-info" onclick="return showMail();" href="">Back</a>
+                                                </div>
+                                                <div class="form-group">
+                                                    <p id="error2" class="text-warning font-weight-bold"></p>
+                                                </div>
+                                                <button type="submit" class="btn btn-success col-md-12">Change Password</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -7,7 +7,7 @@ var models = require("../db/models");
 var sessions = require("../sessions");
 
 
-
+// REMOVE THIS COMMENT AFTER CHANGING THE CODE TO LOGOUT
 router.post('/', function (req, res) {
     username = req.body.username;
     password = req.body.password;

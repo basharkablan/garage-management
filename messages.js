@@ -26,5 +26,17 @@ module.exports = {
     server_internal_error: {
         status: 'server-internal-error',
         message: 'Server internal error'
+    },
+    wrong_email: {
+        status: 'wrong-email',
+        message: 'This email is not registered'
+    },
+    session_timeout: {
+        status: 'session-timeout',
+        message: 'Your session has timed out'
+    },
+    passwords_mismatch: {
+        status: 'passwords-mismatch',
+        message: 'Passwords do not match'
     }
 }

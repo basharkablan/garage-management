@@ -1,14 +1,14 @@
 const uuid = require('uuid/v4');
 var session = require('express-session');
-var messages = require("./messages");
 
 module.exports = {
 
     users_sessions:{},
 
-    getNewSession: function(username) {
+    getNewSession: function(req, username) {
         let sid = uuid();
         this.users_sessions[sid] = {time: Date.now(), username: username};
+        req.session.sid = sid;
         return sid;
     },
 

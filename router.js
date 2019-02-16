@@ -48,25 +48,18 @@ function isNotAuthenticatedPost() {
     };
 };
 
+router.use('/login', isNotAuthenticatedGet(), require('./routes/login-get'));
+router.use('/login', isNotAuthenticatedPost(), require('./routes/login-post'));
 
-//With Auth
-router.use('/login', isNotAuthenticatedGet(), require('./routes/auth-get'));
-router.use('/login', isNotAuthenticatedPost(), require('./routes/auth-post'));
+router.use('/logout', isAuthenticatedPost(), require('./routes/logout-post'));
 
 router.use('/register', isNotAuthenticatedGet(), require('./routes/register-get'));
 router.use('/register', isNotAuthenticatedPost(), require('./routes/register-post'));
 
+router.use('/reset', isNotAuthenticatedGet(), require('./routes/reset-get'));
+router.use('/reset', isNotAuthenticatedPost(), require('./routes/reset-post'));
+
 router.use('/', isAuthenticatedGet(), require('./routes/index-get'));
 router.use('/', isAuthenticatedPost(), require('./routes/index-post'));
-
-// No Auth - Debug only
-// router.use('/', require('./routes/auth-get'));
-// router.use('/', require('./routes/auth-post'));
-
-// router.use('/', require('./routes/register-get'));
-// router.use('/', require('./routes/register-post'));
-
-// router.use('/', require('./routes/index-get'));
-// router.use('/', require('./routes/index-post'));
 
 module.exports = router;
