@@ -38,9 +38,6 @@ $(document).ready(function() {
     $("#nav_btn_2").hover(nav_btn_hover_in, nav_btn_hover_out);
     $("#nav_btn_3").hover(nav_btn_hover_in, nav_btn_hover_out);
     $("#nav_btn_4").hover(nav_btn_hover_in, nav_btn_hover_out);
-    
-    
-
 });
 
 function searchFunction() {

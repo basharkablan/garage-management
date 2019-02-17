@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="maintenance-ang">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8">
 
         <link rel="stylesheet" href="static/lib/bootstrap.min.css" />
+        <link rel="stylesheet" href="static/lib/font-awesome.css">
+        <script src="static/lib/font-awesome.js"></script>
         <script src="static/lib/jquery-3.3.1.min.js"></script>
         <script src="static/lib/popper.min.js"></script>
         <script src="static/lib/bootstrap.min.js"></script>
+        <script src="static/lib/angular.min.js"></script>
 
         <title>
             GarageData 1.0
@@ -15,16 +18,10 @@
 
         <link rel="stylesheet" href="static/stylesheets/index.css" />
         <script src="static/js/index.js"></script>
-
-        <script>
-            function function1(e) {
-                e.preventDefault();
-                return false;
-            }
-        </script>
+        <script src="static/js/maintenance-ang.js"></script>
     </head>
 
-    <body>
+    <body ng-controller="CarRecordsController">
         <div class="bg">
             <div id="mySidenav" class="sidenav">
                 <button id="nav_btn_1" class="btn btn-success" style="top: 100px;" onclick="show1()">Food</button>
@@ -80,20 +77,39 @@
                             <div class="card shadow mb-5 rounded">
                                 <h4 class="card-header display-5">
                                     Maintenance List
+                                    <div class="float-right">
+                                            <button class="btn btn-success"><i class="fas fa-plus"></i> Add</button>
+                                    </div>
                                 </h4>
+                                
                                 <div class="card-body">
                                     <input type="text" id="searchInput" class="" onkeyup="searchFunction()" placeholder="Search ..." title="Type in any detail">
                                     <div class="accordion" id="accordionExample">
-                                        <div class="card">
-                                            <div class="card-header" id="heading1" data-toggle="collapse" data-target="#collapse1" aria-expanded="false"
-                                            aria-controls="collapse1">
+                                        <div class="card" ng-repeat="carRecord in carRecords">
+                                            <div class="card-header" id="heading{{carRecord._id}}" data-toggle="collapse" data-target="#collapse{{carRecord._id}}" aria-expanded="false" aria-controls="collapse{{carRecord._id}}">
                                                 <h6 class="mb-0">
-                                                    <span class="dateTitle mr-3" style="display:inline-block;"><!--{Date}-->12/02/2019</span><span class="carNumberTitle float-right" style="display:inline-block;"><!--{Car Number}-->881-63-557</span>
+                                                    <span class="dateTitle mr-3" style="display:inline-block;">{{carRecord.date | date : "yyyy-MM-dd"}}</span>
+                                                    <span class="carNumberTitle float-right" style="display:inline-block;">{{ carRecord.carNumber }}</span>
                                                 </h6>
                                             </div>
-                                            <div id="collapse1" class="collapse" aria-labelledby="heading1" data-parent="#accordionExample">
+                                            <div id="collapse{{carRecord._id}}" class="collapse" aria-labelledby="heading{{carRecord._id}}" data-parent="#accordionExample">
                                                 <div class="card-body">
-                                                    {Car Details}
+                                                    <div class="row">
+                                                        <div class="carNumberBody col-md-6 mt-1"><b>Number: </b>{{carRecord.carNumber}}</div>
+                                                        <div class="dateBody col-md-6 mt-1"><b>Date:</b> {{carRecord.date | date : "yyyy-MM-dd"}}</div>
+                                                        <div class="brandNameBody col-md-6 mt-1"><b>Brand: </b>{{carRecord.brandName.brandName}}</div>
+                                                        <div class="modelBody col-md-6 mt-1"><b>Model: </b>{{carRecord.model}}</div>
+                                                        <div class="yearBody col-md-6 mt-1"><b>Year: </b>{{carRecord.year}}</div>
+                                                        <div class="engineBody col-md-6 mt-1"><b>Engine: </b>{{carRecord.engine}}</div>
+                                                        <div class="errorCodesBody col-md-12 mt-1"><b>Error Codes </b><div class="col-md-12" ng-repeat="code in carRecord.errorCodes">{{code.code + " - " + code.error}}</div></div>
+                                                        <div class="complaintBody col-md-12 mt-1"><b>Customer complaint </b><div class="col-md-12" >{{carRecord.complaint}}</div></div>
+                                                        <div class="workDoneBody col-md-12 mt-1"><b>Work </b><div class="col-md-12" >{{carRecord.workDone}}</div></div>
+                                                        <span class="costBody col-md-12 mt-1"><b>Cost: </b>{{carRecord.cost}}₪</span>
+                                                        <div class="mt-3 col-md-12">
+                                                            <button id="edit-{{carRecord._id}}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</button>
+                                                            <button id="delete-{{carRecord._id}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
