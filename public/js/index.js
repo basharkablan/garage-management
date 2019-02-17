@@ -38,4 +38,25 @@ $(document).ready(function() {
     $("#nav_btn_2").hover(nav_btn_hover_in, nav_btn_hover_out);
     $("#nav_btn_3").hover(nav_btn_hover_in, nav_btn_hover_out);
     $("#nav_btn_4").hover(nav_btn_hover_in, nav_btn_hover_out);
+    
+    
+
 });
+
+function searchFunction() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("searchInput");
+    filter = input.value.toUpperCase();
+    //cards = $("#accordionExample").find(".card");
+    accordion = document.getElementById("accordionExample");
+    cards = accordion.getElementsByClassName("card");
+    for (i = 0; i < cards.length; i++) {
+        carNumber = cards[i].getElementsByClassName("carNumberTitle")[0];
+        txtValue = carNumber.textContent || carNumber.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            cards[i].style.display = "";
+        } else {
+            cards[i].style.display = "none";
+        }
+    }
+};
