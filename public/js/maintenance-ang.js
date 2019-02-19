@@ -15,13 +15,13 @@ maintenanceApp.controller('CarRecordsController', function CarRecordsController(
         $scope.errorCodes = response.data.result;
     });
 
-    $scope.open = function(id) {
+    $scope.open = function(car) {
         var modalInstance =  $uibModal.open({
             templateUrl: 'static/html/edit_modal.html',
             controller: "ModalContentCtrl",
             controllerAs: 'ctrl',
             resolve: {
-                data: function() { return id; },
+                data: function() { return car._id; },
                 brands: function() { return $scope.brands },
                 errorCodes: function() { return $scope.errorCodes }
               }
@@ -29,9 +29,13 @@ maintenanceApp.controller('CarRecordsController', function CarRecordsController(
         
         modalInstance.result.then(function(response) {
             console.log(response);
-            //$scope.result = `${response} button hitted`;
+            if(response.status == "ok") {
+                var index = $scope.carRecords.indexOf(car);
+                if(index != -1)
+                    $scope.carRecords[index] = response.carRecord;
+            }
         }, function () {
-            console.log("cancel");
+
         });
     };
 });
@@ -61,7 +65,8 @@ angular.module('maintenance-ang')
         ctrl.ok = function() {
             $http.post("/update", {carRecord: ctrl.carRecord}).then(function(response) {
                 if(response.data.status == "success") {
-                    $uibModalInstance.close("Ok");
+                    //$uibModalInstance.close("Ok");
+                    $uibModalInstance.close({status: "ok", carRecord: ctrl.carRecord});
                 }
                 else
                     ctrl.error = response.data.message;
@@ -69,14 +74,12 @@ angular.module('maintenance-ang')
         }
 
         ctrl.cancel = function() {
-            $uibModalInstance.close("cancel");
+            $uibModalInstance.close({status: "cancel"});
             $uibModalInstance.dismiss();
         }
 
         ctrl.addError = function() {
             ctrl.codeInput = $window.codeInput;
-
-            console.log(ctrl.codeInput);
 
             if(errorCodes.indexOf(ctrl.codeInput) !== -1)
                 if(ctrl.carRecord.errorCodes.indexOf(ctrl.codeInput) == -1) {
