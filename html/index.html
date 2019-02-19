@@ -11,6 +11,10 @@
         <script src="static/lib/popper.min.js"></script>
         <script src="static/lib/bootstrap.min.js"></script>
         <script src="static/lib/angular.min.js"></script>
+        
+        <script src="static/lib/angular-animate.js"></script>
+        <script src="static/lib/angular-sanitize.js"></script>
+        <script src="static/lib/ui-bootstrap-tpls-3.0.6.min.js"></script>
 
         <title>
             GarageData 1.0
@@ -21,7 +25,7 @@
         <script src="static/js/maintenance-ang.js"></script>
     </head>
 
-    <body ng-controller="CarRecordsController">
+    <body ng-controller="CarRecordsController as ctrl">
         <div class="bg">
             <div id="overlay" class=""></div>
             
@@ -99,8 +103,8 @@
                                                         <div class="col-md-12 mt-1"><b>Work </b><div class="workDoneBody col-md-12" >{{carRecord.workDone}}</div></div>
                                                         <span class="col-md-12 mt-1"><b>Cost: </b><span class="costBody">{{carRecord.cost}}</span>₪</span>
                                                         <div class="mt-3 col-md-12">
-                                                            <button id="edit-{{carRecord._id}}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</button>
-                                                            <button id="delete-{{carRecord._id}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
+                                                            <button class="btn btn-primary" ng-click="open(carRecord._id)"><i class="fas fa-edit"></i> Edit</button>
+                                                            <button class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
                                                         </div>
                                                     </div>
                                                 </div>

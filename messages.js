@@ -38,5 +38,9 @@ module.exports = {
     passwords_mismatch: {
         status: 'passwords-mismatch',
         message: 'Passwords do not match'
+    },
+    invalid_input: {
+        status: 'invalid-input',
+        message: 'Invalid Input'
     }
 }
