@@ -21,6 +21,40 @@ router.post('/get-maintenance-list', (req, res) => {
         data["result"] = result;
         res.send(JSON.stringify(data));
     });
+});
+
+router.post('/get-brands-list', (req, res) => {
+
+    models.brand.find()
+    .sort({brandName: 'asc'})
+    .exec((err, result) => {
+        if(err) {
+            console.log(err);
+            res.send(JSON.stringify(messages.server_internal_error));
+            return;
+        }
+
+        var data = messages.success;
+        data["result"] = result;
+        res.send(JSON.stringify(data));
+    });
+});
+
+router.post('/get-codes-list', (req, res) => {
+
+    models.code.find()
+    .sort({code: 'asc'})
+    .exec((err, result) => {
+        if(err) {
+            console.log(err);
+            res.send(JSON.stringify(messages.server_internal_error));
+            return;
+        }
+
+        var data = messages.success;
+        data["result"] = result;
+        res.send(JSON.stringify(data));
+    });
     
 });
 
