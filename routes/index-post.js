@@ -91,4 +91,13 @@ router.post('/update', (req, res) => {
     res.send(JSON.stringify(messages.success));
 });
 
+router.post('/add', (req, res) => {
+    if(req.body.carRecord == undefined) {
+        res.send(JSON.stringify(messages.invalid_input));
+        return;
+    }
+
+    res.send(JSON.stringify(messages.success));
+});
+
 module.exports = router;

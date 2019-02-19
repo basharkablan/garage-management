@@ -75,7 +75,7 @@
                                 <h4 class="card-header display-5">
                                     Maintenance List
                                     <div class="float-right">
-                                            <button class="btn btn-success"><i class="fas fa-plus"></i> Add</button>
+                                        <button class="btn btn-success" ng-click="openAdd()"><i class="fas fa-plus"></i> Add</button>
                                     </div>
                                 </h4>
                                 
@@ -103,7 +103,7 @@
                                                         <div class="col-md-12 mt-1"><b>Work </b><div class="workDoneBody col-md-12" >{{carRecord.workDone}}</div></div>
                                                         <span class="col-md-12 mt-1"><b>Cost: </b><span class="costBody">{{carRecord.cost}}</span>₪</span>
                                                         <div class="mt-3 col-md-12">
-                                                            <button class="btn btn-primary" ng-click="open(carRecord)"><i class="fas fa-edit"></i> Edit</button>
+                                                            <button class="btn btn-primary" ng-click="openEdit(carRecord)"><i class="fas fa-edit"></i> Edit</button>
                                                             <button class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
                                                         </div>
                                                     </div>
