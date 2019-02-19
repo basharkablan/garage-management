@@ -124,7 +124,7 @@ angular.module('maintenance-ang')
         $window.codeInput = ctrl.codeInput;
 
         ctrl.carRecord = {carNumber: "", date: new Date(), brandName: {}, model: "",
-        year: 0, engine: "", errorCodes: [], complaint: "", workDone: "", cost: 0};
+        year: 1950, engine: "", errorCodes: [], complaint: "", workDone: "", cost: 0};
         
         ctrl.ok = function() {
             $http.post("/add", {carRecord: ctrl.carRecord}).then(function(response) {

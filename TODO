@@ -1,8 +1,8 @@
 Bashar:
-login page - Done
-register page - Done
-password recovery - Done
-index page (front-end)
+add paging and sort
+add logout
+remove error code
+add delete carRecord functionality in server
+check user input validity
 
 Samer:
-index server side

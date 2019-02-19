@@ -24,7 +24,7 @@
         </div>
         <div class="col-md-6 mt-1">
             <label>Year: </label>
-            <input class="form-control form-control-md rounded-3" type="text" ng-model='ctrl.carRecord.year' />
+            <input class="form-control form-control-md rounded-3" type="text" ng-model='ctrl.carRecord.year' min="1950" max="2020" />
         </div>
         <div class="col-md-6 mt-1">
             <label>Engine: </label>
@@ -55,7 +55,12 @@
         </div>
         <div class="col-md-3 mt-1">
             <label>Cost: </label>
-            <input class="form-control form-control-md rounded-3" type="text" ng-model='ctrl.carRecord.cost' />
+            <div class="input-group">
+                <input class="form-control form-control-md rounded-3" type="text" ng-model='ctrl.carRecord.cost' />
+                <div class="input-group-prepend">
+                    <span class="input-group-text">₪</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>

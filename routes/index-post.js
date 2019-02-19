@@ -97,7 +97,34 @@ router.post('/add', (req, res) => {
         return;
     }
 
-    res.send(JSON.stringify(messages.success));
+    let requestRecord = req.body.carRecord;
+
+    console.log(requestRecord);
+
+    if(requestRecord.carNumber == undefined || requestRecord.date == undefined ||
+            requestRecord.brandName == undefined || requestRecord.model == undefined ||
+            requestRecord.year == undefined || requestRecord.engine == undefined ||
+            requestRecord.errorCodes == undefined || requestRecord.complaint == undefined ||
+            requestRecord.workDone == undefined || requestRecord.cost == undefined) {
+        res.send(JSON.stringify(messages.invalid_input));
+        return;
+    }
+
+    var car = new models.carRecord({carNumber : requestRecord.carNumber,
+        date : requestRecord.date, brandName: requestRecord.brandName, model: requestRecord.model,
+        year: requestRecord.year, engine: requestRecord.engine, errorCodes: requestRecord.errorCodes,
+        complaint: requestRecord.complaint, workDone: requestRecord.workDone, cost: requestRecord.cost});
+
+        car.save(function (err, carRecord) {
+            if(err) {
+                console.log(err);
+                res.send(JSON.stringify(messages.server_internal_error));
+                return;
+            }
+
+            console.log("car record added: " + carRecord.carNumber);
+            res.send(JSON.stringify(messages.success));
+        });
 });
 
 module.exports = router;
