@@ -30,6 +30,7 @@ router.post('/', function (req, res) {
         var sid = sessions.getNewSession(req, result.username);
         console.log("login: " + result.username + " - " + sid);
         var data = messages.success;
+        data["username"] = result.username;
         res.send(JSON.stringify(data));
     });
 });

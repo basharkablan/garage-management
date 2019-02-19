@@ -88,7 +88,31 @@ router.post('/update', (req, res) => {
         return;
     }
 
-    res.send(JSON.stringify(messages.success));
+    let carRecord = req.body.carRecord;
+
+    if(carRecord.carNumber == undefined || carRecord.date == undefined ||
+        carRecord.brandName == undefined || carRecord.model == undefined ||
+        carRecord.year == undefined || carRecord.engine == undefined ||
+        carRecord.errorCodes == undefined || carRecord.complaint == undefined ||
+        carRecord.workDone == undefined || carRecord.cost == undefined) {
+        res.send(JSON.stringify(messages.invalid_input));
+        return;
+    }
+
+    models.carRecord.updateOne({_id: carRecord._id}, carRecord, (err, result) => {
+        if(err) {
+            console.log(err);
+            res.send(JSON.stringify(messages.server_internal_error));
+            return;
+        }
+        if(result == undefined) {
+            res.send(JSON.stringify(messages.invalid_input));
+            return;
+        }
+
+        var data = messages.success;
+        res.send(JSON.stringify(data));
+    });
 });
 
 router.post('/add', (req, res) => {
@@ -125,6 +149,33 @@ router.post('/add', (req, res) => {
             console.log("car record added: " + carRecord.carNumber);
             res.send(JSON.stringify(messages.success));
         });
+});
+
+router.post('/delete', (req, res) => {
+    if(req.body.carRecord == undefined) {
+        res.send(JSON.stringify(messages.invalid_input));
+        return;
+    }
+
+    let carRecord = req.body.carRecord;
+
+    if(carRecord._id == undefined) {
+        res.send(JSON.stringify(messages.invalid_input));
+        return;
+    }
+
+    models.carRecord.deleteOne({_id: carRecord._id}, (err) => {
+        if(err) {
+            console.log(err);
+            res.send(JSON.stringify(messages.server_internal_error));
+            return;
+        }
+
+        var data = messages.success;
+        res.send(JSON.stringify(data));
+      });
+
+    
 });
 
 module.exports = router;

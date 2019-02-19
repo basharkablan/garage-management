@@ -23,28 +23,29 @@
             <input class="form-control form-control-md rounded-3" type="text" ng-model='ctrl.carRecord.model' />
         </div>
         <div class="col-md-6 mt-1">
-            <label>Year: </label>
-            <input class="form-control form-control-md rounded-3" type="text" ng-model='ctrl.carRecord.year' min="1950" max="2020" />
+            <label>Year: {{ctrl.carRecord.year}}</label>
+            <input class="form-control form-control-md rounded-3 custom-range" type="range" ng-model='ctrl.carRecord.year' step="1" min="1950" max="2020" />
         </div>
         <div class="col-md-6 mt-1">
             <label>Engine: </label>
             <input class="form-control form-control-md rounded-3" type="text" ng-model='ctrl.carRecord.engine' />
         </div>
-        <div class="col-md-6 mt-1">
+        <div class="col-md-12 mt-1">
             <label>Error Codes: </label>
             <div>
-                <p ng-repeat="error in ctrl.carRecord.errorCodes"><strong>{{error.code}}</strong> - {{error.error}}</p>
+                <p ng-repeat="error in ctrl.carRecord.errorCodes"><button class="btn btn-danger" ng-click="ctrl.deleteError(error)"><i class="fas fa-trash-alt"></i></button> <strong>{{error.code}}</strong> - {{error.error}}</p>
             </div>
         </div>
-        <div class="col-md-6 mt-1 row">
-            <label class="col-md-12">Add Code: </label>
-            <div class="col-md-10 align-self-end">
-                <input class="form-control form-control-md rounded-3" id="codeInput" type="text" placeholder="Enter P0..." />
-            </div>
-            <div class="col-md-1 align-self-end">
-                <button ng-click="ctrl.addCode()" class="btn btn-success"><i class="fas fa-plus"></i></button>
+        <div class="col-md-12 mt-1">
+            <label>Add Code: </label>
+            <div class="input-group">
+                <input class="form-control form-control-md rounded-3" id="codeInput" type="text" placeholder="Enter P0XXX" />
+                <div class="input-group-append">
+                    <button type="button" ng-click="ctrl.addCode()" class="btn btn-outline-success"><i class="fas fa-plus"></i></button>
+                </div>
             </div>
         </div>
+        
         <div class="col-md-12 mt-1">
             <label>Customer complaint: </label>
             <textarea class="form-control form-control-md rounded-3"  ng-model='ctrl.carRecord.complaint'></textarea>
@@ -74,15 +75,6 @@
         .autocomplete {
             position: relative;
             display: inline-block;
-        }
-
-        #codeInput {
-            box-sizing: border-box;
-            border: 1px solid transparent;
-            background-color: #f1f1f1;
-            padding: 10px;
-            font-size: 16px;
-            width: 100%;
         }
 
         .autocomplete-items {
@@ -135,7 +127,7 @@
                 /*append the DIV element as a child of the autocomplete container:*/
                 this.parentNode.appendChild(a);
                 /*limit is the limit for results that are showing*/
-                var limit = 5;
+                var limit = 7;
                 var cnt = 0;
                 /*for each item in the array...*/
                 for (i = 0; i < arr.length && cnt < limit; i++) {

@@ -28,7 +28,6 @@ maintenanceApp.controller('CarRecordsController', function CarRecordsController(
         });
         
         modalInstance.result.then(function(response) {
-            console.log(response);
             if(response.status == "ok") {
                 // maybe: request the list from server instead
                 var index = $scope.carRecords.indexOf(car);
@@ -52,7 +51,27 @@ maintenanceApp.controller('CarRecordsController', function CarRecordsController(
         });
         
         modalInstance.result.then(function(response) {
-            console.log(response);
+            if(response.status == "ok") {
+                $http.post("get-maintenance-list").then(function(response) {
+                    $scope.carRecords = response.data.result;
+                });
+            }
+        }, function () {
+
+        });
+    };
+
+    $scope.openDelete = function(car) {
+        var modalInstance =  $uibModal.open({
+            templateUrl: 'static/html/delete_modal.html',
+            controller: "ModalDeleteCtrl",
+            controllerAs: 'ctrl',
+            resolve: {
+                data: function() { return car; }
+            }
+        });
+        
+        modalInstance.result.then(function(response) {
             if(response.status == "ok") {
                 $http.post("get-maintenance-list").then(function(response) {
                     $scope.carRecords = response.data.result;
@@ -100,6 +119,11 @@ angular.module('maintenance-ang')
             $uibModalInstance.close({status: "cancel"});
             $uibModalInstance.dismiss();
         }
+        
+        ctrl.deleteError = function(errorCode) {
+            var index = ctrl.carRecord.errorCodes.indexOf(errorCode);
+            ctrl.carRecord.errorCodes.splice(index, 1); 
+        }
 
         ctrl.addCode = function() {
             ctrl.codeInput = $window.codeInput;
@@ -123,7 +147,7 @@ angular.module('maintenance-ang')
         $window.errorCodes = errorCodes;
         $window.codeInput = ctrl.codeInput;
 
-        ctrl.carRecord = {carNumber: "", date: new Date(), brandName: {}, model: "",
+        ctrl.carRecord = {carNumber: "", date: new Date(), brandName: brands[0], model: "",
         year: 1950, engine: "", errorCodes: [], complaint: "", workDone: "", cost: 0};
         
         ctrl.ok = function() {
@@ -141,6 +165,12 @@ angular.module('maintenance-ang')
             $uibModalInstance.dismiss();
         }
 
+        ctrl.deleteError = function(errorCode) {
+            console.log("errorCode");
+            var index = ctrl.carRecord.errorCodes.indexOf(errorCode);
+            ctrl.carRecord.errorCodes.splice(index, 1); 
+        }
+
         ctrl.addCode = function() {
             ctrl.codeInput = $window.codeInput;
 
@@ -148,5 +178,27 @@ angular.module('maintenance-ang')
                 if(ctrl.carRecord.errorCodes.indexOf(ctrl.codeInput) == -1) {
                     ctrl.carRecord.errorCodes.push(ctrl.codeInput);
             }
+        }
+});
+
+angular.module('maintenance-ang')
+    .controller('ModalDeleteCtrl', function($scope, $http, $uibModalInstance, data) {
+        var ctrl = this;
+        ctrl.carRecord = data;
+        ctrl.error = "";
+        
+        ctrl.ok = function() {
+            $http.post("/delete", {carRecord: ctrl.carRecord}).then(function(response) {
+                if(response.data.status == "success") {
+                    $uibModalInstance.close({status: "ok"});
+                }
+                else
+                    ctrl.error = response.data.message;
+            });
+        }
+
+        ctrl.cancel = function() {
+            $uibModalInstance.close({status: "cancel"});
+            $uibModalInstance.dismiss();
         }
 });
