@@ -81,6 +81,27 @@ maintenanceApp.controller('CarRecordsController', function CarRecordsController(
 
         });
     };
+
+    $scope.openLogout = function(car) {
+        var modalInstance =  $uibModal.open({
+            templateUrl: 'static/html/logout_modal.html',
+            controller: "ModalLogoutCtrl",
+            controllerAs: 'ctrl',
+            resolve: {
+                data: function() { return car; }
+            }
+        });
+        
+        modalInstance.result.then(function(response) {
+            if(response.status == "ok") {
+                $http.post("logout").then(function(response) {
+                    $scope.carRecords = response.data.result;
+                });
+            }
+        }, function () {
+
+        });
+    };
 });
 
 angular.module('maintenance-ang')
@@ -106,13 +127,19 @@ angular.module('maintenance-ang')
         })
         
         ctrl.ok = function() {
-            $http.post("/update", {carRecord: ctrl.carRecord}).then(function(response) {
-                if(response.data.status == "success") {
-                    $uibModalInstance.close({status: "ok", carRecord: ctrl.carRecord});
-                }
-                else
-                    ctrl.error = response.data.message;
-            });
+            if(!ctrl.carRecord.errorCodes.length){
+                ctrl.error = "You need to add at least 1 error code";
+            }else if(!(ctrl.carRecord.carNumber == "" || 
+            ctrl.carRecord.model == "" || ctrl.carRecord.engine == "" ||
+            ctrl.carRecord.complaint == "" || ctrl.carRecord.workDone == "")){
+                $http.post("/update", {carRecord: ctrl.carRecord}).then(function(response) {
+                    if(response.data.status == "success") {
+                        $uibModalInstance.close({status: "ok", carRecord: ctrl.carRecord});
+                    }
+                    else
+                        ctrl.error = response.data.message;
+                });
+            }
         }
 
         ctrl.cancel = function() {
@@ -151,13 +178,19 @@ angular.module('maintenance-ang')
         year: 1950, engine: "", errorCodes: [], complaint: "", workDone: "", cost: 0};
         
         ctrl.ok = function() {
-            $http.post("/add", {carRecord: ctrl.carRecord}).then(function(response) {
-                if(response.data.status == "success") {
-                    $uibModalInstance.close({status: "ok", carRecord: ctrl.carRecord});
-                }
-                else
-                    ctrl.error = response.data.message;
-            });
+            if(!ctrl.carRecord.errorCodes.length){
+                ctrl.error = "You need to add at least 1 error code";
+            }else if(!(ctrl.carRecord.carNumber == "" || 
+            ctrl.carRecord.model == "" || ctrl.carRecord.engine == "" ||
+            ctrl.carRecord.complaint == "" || ctrl.carRecord.workDone == "")){
+                $http.post("/add", {carRecord: ctrl.carRecord}).then(function(response) {
+                    if(response.data.status == "success") {
+                        $uibModalInstance.close({status: "ok", carRecord: ctrl.carRecord});
+                    }
+                    else
+                        ctrl.error = response.data.message;
+                });
+            }
         }
 
         ctrl.cancel = function() {
@@ -191,6 +224,29 @@ angular.module('maintenance-ang')
             $http.post("/delete", {carRecord: ctrl.carRecord}).then(function(response) {
                 if(response.data.status == "success") {
                     $uibModalInstance.close({status: "ok"});
+                }
+                else
+                    ctrl.error = response.data.message;
+            });
+        }
+
+        ctrl.cancel = function() {
+            $uibModalInstance.close({status: "cancel"});
+            $uibModalInstance.dismiss();
+        }
+});
+
+angular.module('maintenance-ang')
+    .controller('ModalLogoutCtrl', function($scope, $http, $uibModalInstance, data) {
+        var ctrl = this;
+        ctrl.carRecord = data;
+        ctrl.error = "";
+        
+        ctrl.ok = function() {
+            $http.post("/logout", {carRecord: ctrl.carRecord}).then(function(response) {
+                if(response.data.status == "success") {
+                    $uibModalInstance.close({status: "ok"});
+                    window.location = "/";
                 }
                 else
                     ctrl.error = response.data.message;

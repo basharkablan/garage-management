@@ -1,26 +1,27 @@
 <div class="modal-header">
     <h3>Car Record - {{ctrl.carRecord.carNumber}}</h3>
 </div>
+<form>
 <div class="modal-body">
     <div class="row">
         <div class="col-md-6">
             <label>Car Number: </label>
-            <input class="form-control form-control-md rounded-3" type="text" ng-model='ctrl.carRecord.carNumber' />
+            <input class="form-control form-control-md rounded-3" type="text" ng-model='ctrl.carRecord.carNumber' required />
         </div>
         <div class="col-md-6">
             <label>Date: </label>
-            <input class="form-control form-control-md rounded-3" type="date" ng-model='ctrl.carRecord.date' />
+            <input class="form-control form-control-md rounded-3" type="date" ng-model='ctrl.carRecord.date' required/>
         </div>
         <div class="col-md-6 mt-1">
             <label>Brand: </label>
             <select class="form-control form-control-md rounded-3"
                 ng-model="ctrl.carRecord.brandName"
-                ng-options="brand.brandName for brand in ctrl.brands track by brand._id">
+                ng-options="brand.brandName for brand in ctrl.brands track by brand._id" required>
             </select>
         </div>
         <div class="col-md-6 mt-1">
             <label>Model: </label>
-            <input class="form-control form-control-md rounded-3" type="text" ng-model='ctrl.carRecord.model' />
+            <input class="form-control form-control-md rounded-3" type="text" ng-model='ctrl.carRecord.model' required />
         </div>
         <div class="col-md-6 mt-1">
             <label>Year: {{ctrl.carRecord.year}}</label>
@@ -28,7 +29,7 @@
         </div>
         <div class="col-md-6 mt-1">
             <label>Engine: </label>
-            <input class="form-control form-control-md rounded-3" type="text" ng-model='ctrl.carRecord.engine' />
+            <input class="form-control form-control-md rounded-3" type="text" ng-model='ctrl.carRecord.engine' required/>
         </div>
         <div class="col-md-12 mt-1">
             <label>Error Codes: </label>
@@ -48,16 +49,16 @@
         
         <div class="col-md-12 mt-1">
             <label>Customer complaint: </label>
-            <textarea class="form-control form-control-md rounded-3"  ng-model='ctrl.carRecord.complaint'></textarea>
+            <textarea class="form-control form-control-md rounded-3"  ng-model='ctrl.carRecord.complaint' required></textarea>
         </div>
         <div class="col-md-12 mt-1">
             <label>Work: </label>
-            <textarea class="form-control form-control-md rounded-3"  ng-model='ctrl.carRecord.workDone'></textarea>
+            <textarea class="form-control form-control-md rounded-3"  ng-model='ctrl.carRecord.workDone' required></textarea>
         </div>
-        <div class="col-md-3 mt-1">
+        <div class="col-md-4 mt-1">
             <label>Cost: </label>
             <div class="input-group">
-                <input class="form-control form-control-md rounded-3" type="text" ng-model='ctrl.carRecord.cost' />
+                <input class="form-control form-control-md rounded-3" type="number" ng-model='ctrl.carRecord.cost' required/>
                 <div class="input-group-prepend">
                     <span class="input-group-text">₪</span>
                 </div>
@@ -69,7 +70,8 @@
     <p id="error" class="text-danger font-weight-bold">{{ctrl.error}}</p>
     <button class="btn btn-success" ng-click="ctrl.ok()">OK</button>
     <button class="btn btn-danger" ng-click="ctrl.cancel()">Cancel</button>
-
+</div>
+</form>
     <style>
         /*the container must be positioned relative:*/
         .autocomplete {
@@ -218,4 +220,3 @@
 
         autocomplete(document.getElementById("codeInput"), errorCodes);
     </script>
-</div>
