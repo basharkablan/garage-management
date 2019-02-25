@@ -91,10 +91,9 @@ router.post('/update', (req, res) => {
     let carRecord = req.body.carRecord;
 
     if(carRecord.carNumber == undefined || carRecord.date == undefined ||
-        carRecord.brandName == undefined || carRecord.model == undefined ||
-        carRecord.year == undefined || carRecord.engine == undefined ||
-        carRecord.errorCodes == undefined || carRecord.complaint == undefined ||
-        carRecord.workDone == undefined || carRecord.cost == undefined) {
+            carRecord.brandName == undefined || carRecord.model == undefined ||
+            carRecord.year == undefined || carRecord.errorCodes == undefined ||
+            carRecord.complaint == undefined || carRecord.cost == undefined) {
         res.send(JSON.stringify(messages.invalid_input));
         return;
     }
@@ -127,9 +126,8 @@ router.post('/add', (req, res) => {
 
     if(requestRecord.carNumber == undefined || requestRecord.date == undefined ||
             requestRecord.brandName == undefined || requestRecord.model == undefined ||
-            requestRecord.year == undefined || requestRecord.engine == undefined ||
-            requestRecord.errorCodes == undefined || requestRecord.complaint == undefined ||
-            requestRecord.workDone == undefined || requestRecord.cost == undefined) {
+            requestRecord.year == undefined || requestRecord.errorCodes == undefined ||
+            requestRecord.complaint == undefined || requestRecord.cost == undefined) {
         res.send(JSON.stringify(messages.invalid_input));
         return;
     }

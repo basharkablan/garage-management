@@ -29,10 +29,9 @@ maintenanceApp.controller('CarRecordsController', function CarRecordsController(
         
         modalInstance.result.then(function(response) {
             if(response.status == "ok") {
-                // maybe: request the list from server instead
-                var index = $scope.carRecords.indexOf(car);
-                if(index != -1)
-                    $scope.carRecords[index] = response.carRecord;
+                $http.post("get-maintenance-list").then(function(response) {
+                    $scope.carRecords = response.data.result;
+                });
             }
         }, function () {
 
@@ -82,21 +81,16 @@ maintenanceApp.controller('CarRecordsController', function CarRecordsController(
         });
     };
 
-    $scope.openLogout = function(car) {
+    $scope.openLogout = function() {
         var modalInstance =  $uibModal.open({
             templateUrl: 'static/html/logout_modal.html',
             controller: "ModalLogoutCtrl",
             controllerAs: 'ctrl',
-            resolve: {
-                data: function() { return car; }
-            }
         });
         
         modalInstance.result.then(function(response) {
             if(response.status == "ok") {
-                $http.post("logout").then(function(response) {
-                    $scope.carRecords = response.data.result;
-                });
+                window.location = "/login";
             }
         }, function () {
 
@@ -127,11 +121,8 @@ angular.module('maintenance-ang')
         })
         
         ctrl.ok = function() {
-            if(!ctrl.carRecord.errorCodes.length){
-                ctrl.error = "You need to add at least 1 error code";
-            }else if(!(ctrl.carRecord.carNumber == "" || 
-            ctrl.carRecord.model == "" || ctrl.carRecord.engine == "" ||
-            ctrl.carRecord.complaint == "" || ctrl.carRecord.workDone == "")){
+            var verification = verifyCarRecordInput(ctrl.carRecord)
+            if(verification.status == "OK") {
                 $http.post("/update", {carRecord: ctrl.carRecord}).then(function(response) {
                     if(response.data.status == "success") {
                         $uibModalInstance.close({status: "ok", carRecord: ctrl.carRecord});
@@ -140,6 +131,8 @@ angular.module('maintenance-ang')
                         ctrl.error = response.data.message;
                 });
             }
+            else
+                ctrl.error = verification.message;
         }
 
         ctrl.cancel = function() {
@@ -174,15 +167,12 @@ angular.module('maintenance-ang')
         $window.errorCodes = errorCodes;
         $window.codeInput = ctrl.codeInput;
 
-        ctrl.carRecord = {carNumber: "", date: new Date(), brandName: brands[0], model: "",
-        year: 1950, engine: "", errorCodes: [], complaint: "", workDone: "", cost: 0};
+        ctrl.carRecord = {date: new Date(), brandName: brands[0],
+        year: 1950, errorCodes: [], cost: 0};
         
         ctrl.ok = function() {
-            if(!ctrl.carRecord.errorCodes.length){
-                ctrl.error = "You need to add at least 1 error code";
-            }else if(!(ctrl.carRecord.carNumber == "" || 
-            ctrl.carRecord.model == "" || ctrl.carRecord.engine == "" ||
-            ctrl.carRecord.complaint == "" || ctrl.carRecord.workDone == "")){
+            var verification = verifyCarRecordInput(ctrl.carRecord)
+            if(verification.status == "OK") {
                 $http.post("/add", {carRecord: ctrl.carRecord}).then(function(response) {
                     if(response.data.status == "success") {
                         $uibModalInstance.close({status: "ok", carRecord: ctrl.carRecord});
@@ -191,6 +181,8 @@ angular.module('maintenance-ang')
                         ctrl.error = response.data.message;
                 });
             }
+            else
+                ctrl.error = verification.message;
         }
 
         ctrl.cancel = function() {
@@ -237,16 +229,14 @@ angular.module('maintenance-ang')
 });
 
 angular.module('maintenance-ang')
-    .controller('ModalLogoutCtrl', function($scope, $http, $uibModalInstance, data) {
+    .controller('ModalLogoutCtrl', function($scope, $http, $uibModalInstance) {
         var ctrl = this;
-        ctrl.carRecord = data;
         ctrl.error = "";
         
         ctrl.ok = function() {
             $http.post("/logout", {carRecord: ctrl.carRecord}).then(function(response) {
                 if(response.data.status == "success") {
                     $uibModalInstance.close({status: "ok"});
-                    window.location = "/";
                 }
                 else
                     ctrl.error = response.data.message;

@@ -1,11 +1,3 @@
-function nav_btn_hover_in() {
-    $("#overlay").addClass("overlay");
-}
-
-function nav_btn_hover_out() {
-    $("#overlay").removeClass("overlay");
-}
-
 function searchFunction() {
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById("searchInput");
@@ -23,19 +15,33 @@ function searchFunction() {
         model = cards[i].getElementsByClassName("modelBody")[0];
         modelSearch = model.textContent || model.innerText;
 
-        model = cards[i].getElementsByClassName("modelBody")[0];
-        modelSearch = model.textContent || model.innerText;
-
         year = cards[i].getElementsByClassName("yearBody")[0];
         yearSearch = year.textContent || year.innerText;
+        
+        engine = cards[i].getElementsByClassName("engineBody")[0];
+        engineSearch = engine.textContent || engine.innerText;
 
         if (carNumberSearch.toUpperCase().indexOf(filter.trim()) > -1 ||
             brandSearch.toUpperCase().indexOf(filter.trim()) > -1 ||
             modelSearch.toUpperCase().indexOf(filter.trim()) > -1 ||
-            yearSearch.toUpperCase().indexOf(filter.trim()) > -1) {
+            yearSearch.toUpperCase().indexOf(filter.trim()) > -1 ||
+            engineSearch.toUpperCase().indexOf(filter.trim()) > -1) {
             cards[i].style.display = "";
         } else {
             cards[i].style.display = "none";
         }
     }
+};
+
+
+function verifyCarRecordInput(carRecord) {
+    console.log(carRecord);
+    if(carRecord.carNumber == undefined || carRecord.model == undefined ||
+            carRecord.complaint == undefined || carRecord.cost == undefined ||
+            carRecord.carNumber == "" ||
+            carRecord.model == "" ||
+            carRecord.complaint == "") {
+        return {status: "error", message: "You need to fill the missing fields"};
+    }
+    return {status: "OK", message: ""};
 };
