@@ -1,8 +1,8 @@
 <div class="modal-header">
     <h3>Car Record - {{ctrl.carRecord.carNumber}}</h3>
 </div>
-<div class="modal-body">
-    <form>
+<form>
+    <div class="modal-body">
         <div class="row">
             <div class="col-md-6">
                 <label>Car Number: </label>
@@ -65,13 +65,13 @@
                 </div>
             </div>
         </div>
-    </form>
-</div>
-<div class="modal-footer">
-    <p id="error" class="text-danger font-weight-bold">{{ctrl.error}}</p>
-    <button class="btn btn-success" ng-click="ctrl.ok()">OK</button>
-    <button class="btn btn-danger" ng-click="ctrl.cancel()">Cancel</button>
-</div>
+    </div>
+    <div class="modal-footer">
+        <p id="error" class="text-danger font-weight-bold">{{ctrl.error}}</p>
+        <button class="btn btn-success" ng-click="ctrl.ok()">OK</button>
+        <button class="btn btn-danger" ng-click="ctrl.cancel()">Cancel</button>
+    </div>
+</form>
 <style>
     /*the container must be positioned relative:*/
     .autocomplete {
