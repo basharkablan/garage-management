@@ -2,68 +2,70 @@
     <h3>Car Record - {{ctrl.carRecord.carNumber}}</h3>
 </div>
 <div class="modal-body">
-    <div class="row">
-        <div class="col-md-6">
-            <label>Car Number: </label>
-            <input class="form-control form-control-md rounded-3" type="text" ng-model='ctrl.carRecord.carNumber' required />
-        </div>
-        <div class="col-md-6">
-            <label>Date: </label>
-            <input class="form-control form-control-md rounded-3" type="date" ng-model='ctrl.carRecord.date' required/>
-        </div>
-        <div class="col-md-6 mt-1">
-            <label>Brand: </label>
-            <select class="form-control form-control-md rounded-3"
-                ng-model="ctrl.carRecord.brandName"
-                ng-options="brand.brandName for brand in ctrl.brands track by brand._id" required >
-            </select>
-        </div>
-        <div class="col-md-6 mt-1">
-            <label>Model: </label>
-            <input class="form-control form-control-md rounded-3" type="text" ng-model='ctrl.carRecord.model' required />
-        </div>
-        <div class="col-md-6 mt-1">
-            <label>Year: {{ctrl.carRecord.year}}</label>
-            <input class="form-control form-control-md rounded-3 custom-range" type="range" ng-model='ctrl.carRecord.year' step="1" min="1950" max="2020" />
-        </div>
-        <div class="col-md-6 mt-1">
-            <label>Engine: </label>
-            <input class="form-control form-control-md rounded-3" type="text" ng-model='ctrl.carRecord.engine'/>
-        </div>
-        <div class="col-md-12 mt-1">
-            <label>Error Codes: </label>
-            <div>
-                <p ng-repeat="error in ctrl.carRecord.errorCodes"><button class="btn btn-danger" ng-click="ctrl.deleteError(error)"><i class="fas fa-trash-alt"></i></button> <strong>{{error.code}}</strong> - {{error.error}}</p>
+    <form>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Car Number: </label>
+                <input class="form-control form-control-md rounded-3" type="text" ng-model='ctrl.carRecord.carNumber' required />
             </div>
-        </div>
-        <div class="col-md-12 mt-1">
-            <label>Add Code: </label>
-            <div class="input-group">
-                <input class="form-control form-control-md rounded-3" id="codeInput" type="text" placeholder="Enter P0XXX" />
-                <div class="input-group-append">
-                    <button type="button" ng-click="ctrl.addCode()" class="btn btn-outline-success"><i class="fas fa-plus"></i></button>
+            <div class="col-md-6">
+                <label>Date: </label>
+                <input class="form-control form-control-md rounded-3" type="date" ng-model='ctrl.carRecord.date' required/>
+            </div>
+            <div class="col-md-6 mt-1">
+                <label>Brand: </label>
+                <select class="form-control form-control-md rounded-3"
+                    ng-model="ctrl.carRecord.brandName"
+                    ng-options="brand.brandName for brand in ctrl.brands track by brand._id" required >
+                </select>
+            </div>
+            <div class="col-md-6 mt-1">
+                <label>Model: </label>
+                <input class="form-control form-control-md rounded-3" type="text" ng-model='ctrl.carRecord.model' required />
+            </div>
+            <div class="col-md-6 mt-1">
+                <label>Year: {{ctrl.carRecord.year}}</label>
+                <input class="form-control form-control-md rounded-3 custom-range" type="range" ng-model='ctrl.carRecord.year' step="1" min="1950" max="2020" />
+            </div>
+            <div class="col-md-6 mt-1">
+                <label>Engine: </label>
+                <input class="form-control form-control-md rounded-3" type="text" ng-model='ctrl.carRecord.engine'/>
+            </div>
+            <div class="col-md-12 mt-1">
+                <label>Error Codes: </label>
+                <div>
+                    <p ng-repeat="error in ctrl.carRecord.errorCodes"><button class="btn btn-danger" ng-click="ctrl.deleteError(error)"><i class="fas fa-trash-alt"></i></button> <strong>{{error.code}}</strong> - {{error.error}}</p>
+                </div>
+            </div>
+            <div class="col-md-12 mt-1">
+                <label>Add Code: </label>
+                <div class="input-group">
+                    <input class="form-control form-control-md rounded-3" id="codeInput" type="text" placeholder="Enter P0XXX" />
+                    <div class="input-group-append">
+                        <button type="button" ng-click="ctrl.addCode()" class="btn btn-outline-success"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-12 mt-1">
+                <label>Customer complaint: </label>
+                <textarea class="form-control form-control-md rounded-3"  ng-model='ctrl.carRecord.complaint' required></textarea>
+            </div>
+            <div class="col-md-12 mt-1">
+                <label>Work: </label>
+                <textarea class="form-control form-control-md rounded-3"  ng-model='ctrl.carRecord.workDone' required></textarea>
+            </div>
+            <div class="col-md-4 mt-1">
+                <label>Cost: </label>
+                <div class="input-group">
+                    <input class="form-control form-control-md rounded-3" type="number" ng-model='ctrl.carRecord.cost' min="0" required/>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">₪</span>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <div class="col-md-12 mt-1">
-            <label>Customer complaint: </label>
-            <textarea class="form-control form-control-md rounded-3"  ng-model='ctrl.carRecord.complaint' required></textarea>
-        </div>
-        <div class="col-md-12 mt-1">
-            <label>Work: </label>
-            <textarea class="form-control form-control-md rounded-3"  ng-model='ctrl.carRecord.workDone' required></textarea>
-        </div>
-        <div class="col-md-4 mt-1">
-            <label>Cost: </label>
-            <div class="input-group">
-                <input class="form-control form-control-md rounded-3" type="number" ng-model='ctrl.carRecord.cost' min="0" required/>
-                <div class="input-group-prepend">
-                    <span class="input-group-text">₪</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    </form>
 </div>
 <div class="modal-footer">
     <p id="error" class="text-danger font-weight-bold">{{ctrl.error}}</p>
