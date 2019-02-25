@@ -30,7 +30,7 @@
             <div class="container">
                 <nav class="navbar navbar-dark bg-dark">
                     <a class="navbar-brand" href="/">GarageData 1.0</a>
-                    <button class="btn btn-outline-danger" type="submit" ng-click="openLogout()">Logout</button>
+                    <button class="btn btn-outline-danger text-light" type="submit" ng-click="openLogout()">Logout</button>
                 </nav>
 
                 <div class="container">
@@ -39,7 +39,26 @@
                         <div id="indexPage" class="col-md-12">
                             <div class="card shadow mb-5 rounded">
                                 <h4 class="card-header display-5">
-                                    Maintenance List
+                                    <div class="display-5 text-center">
+                                        - Maintenance List -
+                                    </div>
+                                    <div class="float-left">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-sort-amount-up"></i></span>
+                                                <select class="form-control form-control-sm rounded-3" name="sort_select" ng-model="sort_id" ng-change="sort_change()">
+                                                    <option value="date-asc">Date ↑</option>
+                                                    <option value="date-desc">Date ↓</option>
+                                                    <option value="brandName-asc">Brand ↑</option>
+                                                    <option value="brandName-desc">Brand ↓</option>
+                                                    <option value="year-asc">Year ↑</option>
+                                                    <option value="year-desc">Year ↓</option>
+                                                    <option value="cost-asc">Cost ↑</option>
+                                                    <option value="cost-desc">Cost ↓</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="float-right">
                                         <button class="btn btn-success" ng-click="openAdd()"><i class="fas fa-plus"></i> Add</button>
                                     </div>

@@ -6,8 +6,25 @@ var models = require('../db/models');
 
 router.post('/get-maintenance-list', (req, res) => {
 
+    var sort_by = {date: 'desc'};
+    var sort_id = req.body.sort_id;
+
+    if(sort_id) {
+        switch(sort_id) {
+            case "date-asc": sort_by = {date: 'asc'}; break;
+            case "date-desc": sort_by = {date: 'desc'}; break;
+            case "brandName-asc": sort_by = {brandName: 'asc'}; break;
+            case "brandName-desc": sort_by = {brandName: 'desc'}; break;
+            case "year-asc": sort_by = {year: 'asc'}; break;
+            case "year-desc": sort_by = {year: 'desc'}; break;
+            case "cost-asc": sort_by = {cost: 'asc'}; break;
+            case "cost-desc": sort_by = {cost: 'desc'}; break;
+            default: sort_by = {date: 'desc'}; break;
+        }
+    }
+
     models.carRecord.find()
-    .sort({date: 'desc'})
+    .sort(sort_by)
     .populate('brandName')
     .populate('errorCodes')
     .exec((err, result) => {
@@ -121,8 +138,6 @@ router.post('/add', (req, res) => {
     }
 
     let requestRecord = req.body.carRecord;
-
-    console.log(requestRecord);
 
     if(requestRecord.carNumber == undefined || requestRecord.date == undefined ||
             requestRecord.brandName == undefined || requestRecord.model == undefined ||

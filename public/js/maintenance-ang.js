@@ -96,6 +96,14 @@ maintenanceApp.controller('CarRecordsController', function CarRecordsController(
 
         });
     };
+
+    $scope.sort_id = "date-desc";
+
+    $scope.sort_change = function() {
+        $http.post("get-maintenance-list", {sort_id: $scope.sort_id}, $scope.sort_id).then(function(response) {
+            $scope.carRecords = response.data.result;
+        });
+    }
 });
 
 angular.module('maintenance-ang')
