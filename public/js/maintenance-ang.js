@@ -3,7 +3,11 @@ const maintenanceApp = angular.module('maintenance-ang', ['ui.bootstrap']);
 
 // Define the `CarRecordsController` controller on the `maintenanceApp` module
 maintenanceApp.controller('CarRecordsController', function CarRecordsController($scope, $http, $uibModal) {
-    $http.post("get-maintenance-list").then(function(response) {
+
+    $scope.pageNo = 1;
+    $scope.sort_id = "date-desc";
+    
+    $http.post("get-maintenance-list", {sort_id: $scope.sort_id, pageNo: $scope.pageNo}).then(function(response) {
         $scope.carRecords = response.data.result;
     });
 
@@ -29,7 +33,7 @@ maintenanceApp.controller('CarRecordsController', function CarRecordsController(
         
         modalInstance.result.then(function(response) {
             if(response.status == "ok") {
-                $http.post("get-maintenance-list").then(function(response) {
+                $http.post("get-maintenance-list", {sort_id: $scope.sort_id, pageNo: $scope.pageNo}).then(function(response) {
                     $scope.carRecords = response.data.result;
                 });
             }
@@ -51,7 +55,7 @@ maintenanceApp.controller('CarRecordsController', function CarRecordsController(
         
         modalInstance.result.then(function(response) {
             if(response.status == "ok") {
-                $http.post("get-maintenance-list").then(function(response) {
+                $http.post("get-maintenance-list", {sort_id: $scope.sort_id, pageNo: $scope.pageNo}).then(function(response) {
                     $scope.carRecords = response.data.result;
                 });
             }
@@ -72,7 +76,7 @@ maintenanceApp.controller('CarRecordsController', function CarRecordsController(
         
         modalInstance.result.then(function(response) {
             if(response.status == "ok") {
-                $http.post("get-maintenance-list").then(function(response) {
+                $http.post("get-maintenance-list", {sort_id: $scope.sort_id, pageNo: $scope.pageNo}).then(function(response) {
                     $scope.carRecords = response.data.result;
                 });
             }
@@ -97,10 +101,8 @@ maintenanceApp.controller('CarRecordsController', function CarRecordsController(
         });
     };
 
-    $scope.sort_id = "date-desc";
-
     $scope.sort_change = function() {
-        $http.post("get-maintenance-list", {sort_id: $scope.sort_id}, $scope.sort_id).then(function(response) {
+        $http.post("get-maintenance-list", {sort_id: $scope.sort_id, pageNo: $scope.pageNo}).then(function(response) {
             $scope.carRecords = response.data.result;
         });
     }

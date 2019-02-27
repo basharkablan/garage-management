@@ -23,7 +23,18 @@ router.post('/get-maintenance-list', (req, res) => {
         }
     }
 
-    models.carRecord.find()
+    var size = 10;
+    var pageNo = req.body.pageNo;
+
+    if(pageNo == undefined || pageNo <= 0) {
+        pageNo = 1;
+    }
+
+    query = {};
+    query.skip = size * (pageNo - 1);
+    query.limit = 10;
+
+    models.carRecord.find({}, {}, query)
     .sort(sort_by)
     .populate('brandName')
     .populate('errorCodes')

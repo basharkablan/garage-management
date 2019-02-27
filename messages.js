@@ -42,5 +42,13 @@ module.exports = {
     invalid_input: {
         status: 'invalid-input',
         message: 'Invalid Input'
+    },
+    paging_number: {
+        status: 'paging-number',
+        message: 'Invalid page number, should start with 1'
+    },
+    fetch_data: {
+        status: 'fetch-data',
+        message: 'Error fetching data'
     }
 }
