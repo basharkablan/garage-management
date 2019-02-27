@@ -11,10 +11,10 @@ router.post('/get-maintenance-list', (req, res) => {
 
     if(sort_id) {
         switch(sort_id) {
+            case "carNumber-asc": sort_by = {carNumber: 'asc'}; break;
+            case "carNumber-desc": sort_by = {carNumber: 'desc'}; break;
             case "date-asc": sort_by = {date: 'asc'}; break;
             case "date-desc": sort_by = {date: 'desc'}; break;
-            case "brandName-asc": sort_by = {brandName: 'asc'}; break;
-            case "brandName-desc": sort_by = {brandName: 'desc'}; break;
             case "year-asc": sort_by = {year: 'asc'}; break;
             case "year-desc": sort_by = {year: 'desc'}; break;
             case "cost-asc": sort_by = {cost: 'asc'}; break;
