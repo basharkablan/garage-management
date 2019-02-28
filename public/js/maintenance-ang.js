@@ -4,12 +4,27 @@ const maintenanceApp = angular.module('maintenance-ang', ['ui.bootstrap']);
 // Define the `CarRecordsController` controller on the `maintenanceApp` module
 maintenanceApp.controller('CarRecordsController', function CarRecordsController($scope, $http, $uibModal) {
 
-    $scope.pageNo = 1;
+    $scope.maxSize = 5;
+    $scope.totalItems;
+    $scope.currentPage = 1;
     $scope.sort_id = "date-desc";
+  
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+  
+    $scope.pageChanged = function() {
+        $scope.downloadList();
+    };
+
+    $scope.downloadList = function() {
+        $http.post("get-maintenance-list", {sort_id: $scope.sort_id, pageNo: $scope.currentPage}).then(function(response) {
+            $scope.carRecords = response.data.result;
+            $scope.totalItems = response.data.count;
+        });
+    };
     
-    $http.post("get-maintenance-list", {sort_id: $scope.sort_id, pageNo: $scope.pageNo}).then(function(response) {
-        $scope.carRecords = response.data.result;
-    });
+    $scope.downloadList();
 
     $http.post("get-brands-list").then(function(response) {
         $scope.brands = response.data.result;
@@ -33,9 +48,7 @@ maintenanceApp.controller('CarRecordsController', function CarRecordsController(
         
         modalInstance.result.then(function(response) {
             if(response.status == "ok") {
-                $http.post("get-maintenance-list", {sort_id: $scope.sort_id, pageNo: $scope.pageNo}).then(function(response) {
-                    $scope.carRecords = response.data.result;
-                });
+                $scope.downloadList();
             }
         }, function () {
 
@@ -55,9 +68,7 @@ maintenanceApp.controller('CarRecordsController', function CarRecordsController(
         
         modalInstance.result.then(function(response) {
             if(response.status == "ok") {
-                $http.post("get-maintenance-list", {sort_id: $scope.sort_id, pageNo: $scope.pageNo}).then(function(response) {
-                    $scope.carRecords = response.data.result;
-                });
+                $scope.downloadList();
             }
         }, function () {
 
@@ -76,9 +87,7 @@ maintenanceApp.controller('CarRecordsController', function CarRecordsController(
         
         modalInstance.result.then(function(response) {
             if(response.status == "ok") {
-                $http.post("get-maintenance-list", {sort_id: $scope.sort_id, pageNo: $scope.pageNo}).then(function(response) {
-                    $scope.carRecords = response.data.result;
-                });
+                $scope.downloadList();
             }
         }, function () {
 
@@ -102,9 +111,7 @@ maintenanceApp.controller('CarRecordsController', function CarRecordsController(
     };
 
     $scope.sort_change = function() {
-        $http.post("get-maintenance-list", {sort_id: $scope.sort_id, pageNo: $scope.pageNo}).then(function(response) {
-            $scope.carRecords = response.data.result;
-        });
+        $scope.downloadList();
     }
 });
 

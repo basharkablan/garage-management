@@ -34,20 +34,29 @@ router.post('/get-maintenance-list', (req, res) => {
     query.skip = size * (pageNo - 1);
     query.limit = 10;
 
-    models.carRecord.find({}, {}, query)
-    .sort(sort_by)
-    .populate('brandName')
-    .populate('errorCodes')
-    .exec((err, result) => {
+    models.carRecord.countDocuments({}, (err, count) => {
         if(err) {
             console.log(err);
             res.send(JSON.stringify(messages.server_internal_error));
             return;
         }
 
-        var data = messages.success;
-        data["result"] = result;
-        res.send(JSON.stringify(data));
+        models.carRecord.find({}, {}, query)
+        .sort(sort_by)
+        .populate('brandName')
+        .populate('errorCodes')
+        .exec((err, result) => {
+            if(err) {
+                console.log(err);
+                res.send(JSON.stringify(messages.server_internal_error));
+                return;
+            }
+
+            var data = messages.success;
+            data["result"] = result;
+            data["count"] = count;
+            res.send(JSON.stringify(data));
+        });
     });
 });
 

@@ -1,5 +1,5 @@
 function searchFunction() {
-    var input, filter, ul, li, a, i, txtValue;
+    var input, filter, i;
     input = document.getElementById("searchInput");
     filter = input.value.toUpperCase();
     accordion = document.getElementById("accordionExample");
