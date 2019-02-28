@@ -4,7 +4,11 @@ Garage Management Website
 
 ## Installing dependencies
 
-commands:
+One command:
+
+* npm install
+
+Or dependencies one by one:
 
 * npm install express
 * npm install express-favicon
