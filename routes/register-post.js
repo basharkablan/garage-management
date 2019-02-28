@@ -19,6 +19,11 @@ router.post('/', (req, res) => {
     var user = new models.user({firstName : first, lastName : last, email : email, username : username, password : password});
     user.save(function (err, user) {
         if(err) {
+
+            if(err.code == 11000) {
+                res.send(JSON.stringify(messages.already_registered));
+                return;
+            }
             console.log(err);
             res.send(JSON.stringify(messages.server_internal_error));
             return;

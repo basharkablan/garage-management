@@ -11,6 +11,10 @@ module.exports = {
         status: 'already-logged-in',
         message: 'You already logged in'
     },
+    already_registered: {
+        status: 'already-registered',
+        message: 'This email or username is already registered'
+    },
     wrong_cred: {
         status: 'wrong-cred',
         message:'Incorrect username or password'
