@@ -52,7 +52,9 @@ router.post('/get-maintenance-list', (req, res) => {
                 return;
             }
 
-            var data = messages.success;
+            var data;
+            data.status = messages.success.status;
+            data.message = messages.success.message;
             data["result"] = result;
             data["count"] = count;
             res.send(JSON.stringify(data));
@@ -71,7 +73,9 @@ router.post('/get-brands-list', (req, res) => {
             return;
         }
 
-        var data = messages.success;
+        var data;
+        data.status = messages.success.status;
+        data.message = messages.success.message;
         data["result"] = result;
         res.send(JSON.stringify(data));
     });
@@ -88,7 +92,9 @@ router.post('/get-codes-list', (req, res) => {
             return;
         }
 
-        var data = messages.success;
+        var data;
+        data.status = messages.success.status;
+        data.message = messages.success.message;
         data["result"] = result;
         res.send(JSON.stringify(data));
     });
@@ -112,7 +118,9 @@ router.post('/get-car-record', (req, res) => {
             return;
         }
 
-        var data = messages.success;
+        var data;
+        data.status = messages.success.status;
+        data.message = messages.success.message;
         data["result"] = result;
         res.send(JSON.stringify(data));
     });
@@ -146,7 +154,9 @@ router.post('/update', (req, res) => {
             return;
         }
 
-        var data = messages.success;
+        var data;
+        data.status = messages.success.status;
+        data.message = messages.success.message;
         res.send(JSON.stringify(data));
     });
 });
@@ -204,7 +214,9 @@ router.post('/delete', (req, res) => {
             return;
         }
 
-        var data = messages.success;
+        var data;
+        data.status = messages.success.status;
+        data.message = messages.success.message;
         res.send(JSON.stringify(data));
       });
 

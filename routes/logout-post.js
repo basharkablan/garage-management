@@ -8,7 +8,9 @@ var sessions = require("../sessions");
 
 router.post('/', function (req, res) {
     sessions.removeSession(req);
-    var data = messages.success;
+    var data;
+    data.status = messages.success.status;
+    data.message = messages.success.message;
     res.send(JSON.stringify(data));
 });
 

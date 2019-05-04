@@ -29,7 +29,9 @@ router.post('/', function (req, res) {
         }
         var sid = sessions.getNewSession(req, result.username);
         console.log("login: " + result.username + " - " + sid);
-        var data = messages.success;
+        var data;
+        data.status = messages.success.status;
+        data.message = messages.success.message;
         data["username"] = result.username;
         res.send(JSON.stringify(data));
     });

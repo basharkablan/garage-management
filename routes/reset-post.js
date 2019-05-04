@@ -27,7 +27,9 @@ router.post('/', function (req, res) {
             return;
         }
         console.log("reset: " + email);
-        var data = messages.success;
+        var data;
+        data.status = messages.success.status;
+        data.message = messages.success.message;
         reset_sessions.getNewSession(req, email);
         res.send(JSON.stringify(data));
     });
@@ -72,7 +74,9 @@ router.post('/password', function (req, res) {
         }
 
         console.log("password reset: " + email);
-        var data = messages.success;
+        var data;
+        data.status = messages.success.status;
+        data.message = messages.success.message;
         res.send(JSON.stringify(data));
     });
 });
