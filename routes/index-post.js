@@ -52,7 +52,7 @@ router.post('/get-maintenance-list', (req, res) => {
                 return;
             }
 
-            var data;
+            var data = {};
             data.status = messages.success.status;
             data.message = messages.success.message;
             data["result"] = result;
@@ -73,7 +73,7 @@ router.post('/get-brands-list', (req, res) => {
             return;
         }
 
-        var data;
+        var data = {};
         data.status = messages.success.status;
         data.message = messages.success.message;
         data["result"] = result;
@@ -92,7 +92,7 @@ router.post('/get-codes-list', (req, res) => {
             return;
         }
 
-        var data;
+        var data = {};
         data.status = messages.success.status;
         data.message = messages.success.message;
         data["result"] = result;
@@ -118,7 +118,7 @@ router.post('/get-car-record', (req, res) => {
             return;
         }
 
-        var data;
+        var data = {};
         data.status = messages.success.status;
         data.message = messages.success.message;
         data["result"] = result;
@@ -154,7 +154,7 @@ router.post('/update', (req, res) => {
             return;
         }
 
-        var data;
+        var data = {};
         data.status = messages.success.status;
         data.message = messages.success.message;
         res.send(JSON.stringify(data));
@@ -214,7 +214,7 @@ router.post('/delete', (req, res) => {
             return;
         }
 
-        var data;
+        var data = {};
         data.status = messages.success.status;
         data.message = messages.success.message;
         res.send(JSON.stringify(data));
